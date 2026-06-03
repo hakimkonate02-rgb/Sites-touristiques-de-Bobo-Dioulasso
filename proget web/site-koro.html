@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forêt Sacrée de Koro — Bobo-Dioulasso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--or:#C9973A;--or-clair:#E8C97A;--brun:#3B2410;--terre:#6B3D1E;--creme:#F5EFE0;--blanc:#FDFAF4;--texte:#2C1A0E;--gris:#8C7B6B;--font-titre:'Cormorant Garamond',serif;--font-corps:'Jost',sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-corps);background-color:var(--blanc);color:var(--texte);min-height:100vh;display:flex;flex-direction:column;background-image:radial-gradient(ellipse at 10% 20%,rgba(201,151,58,0.07) 0%,transparent 55%),radial-gradient(ellipse at 90% 80%,rgba(107,61,30,0.06) 0%,transparent 55%);}
+    header{position:sticky;top:0;z-index:100;background:rgba(59,36,16,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,151,58,0.3);}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px;}
+    .brand{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .brand-logo{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--or),var(--terre));display:flex;align-items:center;justify-content:center;font-family:var(--font-titre);font-size:1.4rem;font-weight:700;color:var(--blanc);box-shadow:0 0 0 2px rgba(201,151,58,0.4);}
+    .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+    .brand-name{font-family:var(--font-titre);font-size:1.25rem;font-weight:600;color:var(--or-clair);}
+    .brand-tagline{font-size:0.68rem;font-weight:300;color:rgba(245,239,224,0.55);letter-spacing:0.18em;text-transform:uppercase;}
+    nav ul{list-style:none;display:flex;gap:0.2rem;}
+    nav ul li a{display:block;padding:0.5rem 1rem;font-size:0.82rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,239,224,0.75);text-decoration:none;transition:color 0.2s;position:relative;}
+    nav ul li a::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--or);transition:width 0.3s ease;}
+    nav ul li a:hover,nav ul li a.actif{color:var(--or-clair);}
+    nav ul li a:hover::after,nav ul li a.actif::after{width:calc(100% - 2rem);}
+    .fil-ariane{background:var(--creme);border-bottom:1px solid rgba(201,151,58,0.15);padding:0.75rem 2rem;}
+    .fil-ariane-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--gris);}
+    .fil-ariane a{color:var(--or);text-decoration:none;}
+    .hero-site{background:linear-gradient(145deg,#1E3A1A,#3A6B30,#70A050);min-height:400px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .hero-site::before{content:'🌳';position:absolute;font-size:16rem;opacity:0.07;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .hero-site-contenu{position:relative;z-index:2;text-align:center;padding:3rem 2rem;}
+    .hero-icone{font-size:4.5rem;margin-bottom:1rem;}
+    .hero-badge{display:inline-block;font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--or);border:1px solid rgba(201,151,58,0.4);padding:0.35rem 1rem;border-radius:2px;margin-bottom:1.2rem;}
+    .hero-site-titre{font-family:var(--font-titre);font-size:clamp(2rem,5vw,3.8rem);font-weight:700;color:var(--creme);line-height:1.05;margin-bottom:0.8rem;}
+    .hero-site-titre em{font-style:italic;color:var(--or-clair);}
+    .hero-site-sous{font-size:0.9rem;font-weight:300;color:rgba(245,239,224,0.65);letter-spacing:0.08em;}
+    main{flex:1;max-width:900px;margin:0 auto;width:100%;padding:4rem 2rem;}
+    .section-sous-titre{font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--or);margin-bottom:0.5rem;}
+    .section-titre{font-family:var(--font-titre);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--brun);line-height:1.2;margin-bottom:1.2rem;}
+    .section-titre span{color:var(--or);font-style:italic;}
+    .separateur{display:flex;align-items:center;gap:1rem;margin:1.8rem 0;}
+    .separateur::before,.separateur::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--or),transparent);opacity:0.35;}
+    .separateur-icone{color:var(--or);font-size:0.85rem;}
+    .texte{font-size:0.95rem;font-weight:300;color:#5A3E2B;line-height:1.9;margin-bottom:1.2rem;}
+    .infos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:2rem 0;background:var(--creme);border:1px solid rgba(201,151,58,0.15);border-radius:4px;padding:1.5rem;}
+    .info-item{text-align:center;}
+    .info-valeur{font-family:var(--font-titre);font-size:1.4rem;font-weight:700;color:var(--or);display:block;}
+    .info-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gris);margin-top:0.2rem;}
+    .btn{display:inline-block;padding:0.75rem 2rem;font-size:0.8rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.25s;border:none;cursor:pointer;}
+    .btn-contour{background:transparent;color:var(--or);border:1px solid var(--or);}
+    .btn-contour:hover{background:var(--or);color:var(--blanc);}
+    footer{background:var(--brun);color:rgba(245,239,224,0.6);border-top:1px solid rgba(201,151,58,0.2);}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;}
+    .footer-col h4{font-family:var(--font-titre);font-size:1rem;font-weight:600;color:var(--or-clair);margin-bottom:0.8rem;}
+    .footer-col p,.footer-col a{font-size:0.82rem;font-weight:300;line-height:1.8;color:rgba(245,239,224,0.55);text-decoration:none;display:block;}
+    .footer-col a:hover{color:var(--or);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:1rem 2rem;border-top:1px solid rgba(201,151,58,0.1);display:flex;justify-content:space-between;font-size:0.75rem;color:rgba(245,239,224,0.3);}
+    .footer-divider{width:32px;height:1px;background:var(--or);opacity:0.5;margin:0.6rem 0;}
+    @media(max-width:768px){.header-inner{padding:0 1rem;height:60px;}.brand-tagline{display:none;}nav ul li a{padding:0.4rem 0.6rem;font-size:0.75rem;}.footer-inner{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:0.5rem;}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">BD</div>
+        <div class="brand-text"><span class="brand-name">Bobo-Dioulasso</span><span class="brand-tagline">Cité de l'Harmonie</span></div>
+      </a>
+      <nav><ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="patrimoine.html" class="actif">Patrimoine</a></li>
+        <li><a href="reservation.html">Réservation d'hôtel</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+      </ul></nav>
+    </div>
+  </header>
+  <div class="fil-ariane"><div class="fil-ariane-inner">
+    <a href="index.html">Accueil</a> <span>›</span>
+    <a href="patrimoine.html">Patrimoine</a> <span>›</span>
+    <span>Forêt Sacrée de Koro</span>
+  </div></div>
+  <section class="hero-site">
+    <div class="hero-site-contenu">
+      <div class="hero-icone"><img src="koro.jpg" alt="foret sacrer" width="1000"></div>
+      <span class="hero-badge">✦ Site naturel sacré · Patrimoine immatériel ✦</span>
+      <h1 class="hero-site-titre">Forêt Sacrée de <em>Koro</em></h1>
+    </div>
+  </section>
+  <main>
+    <p class="section-sous-titre">Présentation</p>
+    <h2 class="section-titre">Un sanctuaire <span>vivant</span></h2>
+    <div class="separateur"><span class="separateur-icone">✦</span></div>
+    <p class="texte">La forêt sacrée de Koro est l'un des hauts lieux spirituels de Bobo-Dioulasso. Classée et protégée, cette forêt dense abrite des génies tutélaires vénérés par les communautés locales depuis des générations. Son entrée est soumise à des règles strictes de respect et de recueillement.</p>
+    <p class="texte">Au-delà de sa dimension sacrée, la forêt de Koro constitue un précieux réservoir de biodiversité. On y recense des dizaines d'espèces végétales médicinales utilisées par les tradipraticiens, ainsi qu'une faune remarquable incluant des singes, des reptiles et une avifaune exceptionnelle.</p>
+    <div class="infos-grid">
+      <div class="info-item"><span class="info-valeur">Classée</span><span class="info-label">Protection</span></div>
+      <div class="info-item"><span class="info-valeur">Guidée</span><span class="info-label">Visite obligatoire</span></div>
+      <div class="info-item"><span class="info-valeur">Biodiversité</span><span class="info-label">Richesse</span></div>
+      <div class="info-item"><span class="info-valeur">Koro</span><span class="info-label">Village</span></div>
+    </div>
+    <div class="separateur"><span class="separateur-icone">✦</span></div>
+    <p class="section-sous-titre">Historique</p>
+    <h2 class="section-titre">Mémoire <span>spirituelle</span> des ancêtres</h2>
+    <p class="texte">Pour les populations Bobo-Fing, la forêt de Koro n'est pas seulement un espace naturel : c'est le domaine des ancêtres et des forces invisibles qui veillent sur la communauté. Des cérémonies propitiatoires y sont célébrées à chaque début de saison des pluies pour demander la prospérité des récoltes.</p>
+    <p class="texte">La préservation de la forêt sacrée de Koro est un enjeu majeur pour les défenseurs du patrimoine culturel et environnemental du Burkina Faso. Des programmes de sensibilisation associant tradition et écologie moderne y sont menés avec les communautés locales.</p>
+    <div class="separateur"><span class="separateur-icone">✦</span></div>
+    <a href="patrimoine.html" class="btn btn-contour">← Retour au patrimoine</a>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col"><h4>Bobo-Dioulasso</h4><div class="footer-divider"></div><p>Deuxième ville du Burkina Faso, carrefour culturel de l'Afrique de l'Ouest.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><div class="footer-divider"></div><a href="index.html">Accueil</a><a href="patrimoine.html">Patrimoine</a><a href="reservation.html">Réservation d'hôtel</a><a href="galerie.html">Galerie</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-divider"></div><p>Mairie de Bobo-Dioulasso</p><p>Burkina Faso, Hauts-Bassins</p><p>tourisme@bobodioulasso.bf</p></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Bobo-Dioulasso — Tous droits réservés</span><span>Site touristique officiel</span></div>
+  </footer>
+</body>
+</html>

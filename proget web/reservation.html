@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Réservation d'hôtel — Bobo-Dioulasso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--or:#C9973A;--or-clair:#E8C97A;--brun:#3B2410;--terre:#6B3D1E;--creme:#F5EFE0;--blanc:#FDFAF4;--texte:#2C1A0E;--gris:#8C7B6B;--rouge:#C0392B;--vert:#27AE60;--font-titre:'Cormorant Garamond',serif;--font-corps:'Jost',sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-corps);background-color:var(--blanc);color:var(--texte);min-height:100vh;display:flex;flex-direction:column;background-image:radial-gradient(ellipse at 10% 20%,rgba(201,151,58,0.07) 0%,transparent 55%),radial-gradient(ellipse at 90% 80%,rgba(107,61,30,0.06) 0%,transparent 55%),url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9973A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+    /* HEADER */
+    header{position:sticky;top:0;z-index:100;background:rgba(59,36,16,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,151,58,0.3);}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px;}
+    .brand{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .brand-logo{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--or),var(--terre));display:flex;align-items:center;justify-content:center;font-family:var(--font-titre);font-size:1.4rem;font-weight:700;color:var(--blanc);box-shadow:0 0 0 2px rgba(201,151,58,0.4);}
+    .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+    .brand-name{font-family:var(--font-titre);font-size:1.25rem;font-weight:600;color:var(--or-clair);}
+    .brand-tagline{font-size:0.68rem;font-weight:300;color:rgba(245,239,224,0.55);letter-spacing:0.18em;text-transform:uppercase;}
+    nav ul{list-style:none;display:flex;gap:0.2rem;}
+    nav ul li a{display:block;padding:0.5rem 1rem;font-size:0.82rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,239,224,0.75);text-decoration:none;transition:color 0.2s;position:relative;}
+    nav ul li a::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--or);transition:width 0.3s ease;}
+    nav ul li a:hover,nav ul li a.actif{color:var(--or-clair);}
+    nav ul li a:hover::after,nav ul li a.actif::after{width:calc(100% - 2rem);}
+    /* FIL ARIANE */
+    .fil-ariane{background:var(--creme);border-bottom:1px solid rgba(201,151,58,0.15);padding:0.75rem 2rem;}
+    .fil-ariane-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--gris);}
+    .fil-ariane a{color:var(--or);text-decoration:none;}
+    /* HERO */
+    .hero-page{background:linear-gradient(160deg,var(--brun) 0%,#4A2810 60%,var(--terre) 100%);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;}
+    .hero-page::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9973A' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3C/g%3E%3C/svg%3E");}
+    .hero-page-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .hero-label{display:inline-block;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--or);border:1px solid rgba(201,151,58,0.4);padding:0.4rem 1.2rem;border-radius:2px;margin-bottom:1.5rem;}
+    .hero-titre{font-family:var(--font-titre);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;color:var(--creme);line-height:1.05;margin-bottom:1rem;}
+    .hero-titre em{font-style:italic;color:var(--or-clair);}
+    .hero-sous{font-size:0.95rem;font-weight:300;color:rgba(245,239,224,0.65);line-height:1.7;}
+    /* CONTENU */
+    .page-contenu{flex:1;max-width:1100px;margin:0 auto;width:100%;padding:4rem 2rem;}
+    .grille-resa{display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;}
+    /* FORMULAIRE */
+    .form-card{background:var(--blanc);border:1px solid rgba(201,151,58,0.15);border-radius:6px;padding:2.5rem;box-shadow:0 4px 24px rgba(59,36,16,0.06);}
+    .section-sous-titre{font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--or);margin-bottom:0.5rem;}
+    .section-titre{font-family:var(--font-titre);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--brun);line-height:1.2;margin-bottom:0.3rem;}
+    .section-titre span{color:var(--or);font-style:italic;}
+    .separateur{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;}
+    .separateur::before,.separateur::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--or),transparent);opacity:0.35;}
+    .separateur-icone{color:var(--or);font-size:0.85rem;}
+    /* Groupes de formulaire */
+    .form-section-titre{font-family:var(--font-titre);font-size:1.1rem;font-weight:600;color:var(--brun);margin:1.8rem 0 1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(201,151,58,0.2);display:flex;align-items:center;gap:0.5rem;}
+    .form-section-titre span{font-size:1.2rem;}
+    .form-grille{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+    .form-grille.un{grid-template-columns:1fr;}
+    .form-grille.trois{grid-template-columns:1fr 1fr 1fr;}
+    .form-groupe{display:flex;flex-direction:column;gap:0.4rem;}
+    .form-groupe label{font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gris);}
+    .form-groupe label .requis{color:var(--or);margin-left:2px;}
+    .form-groupe input,
+    .form-groupe select,
+    .form-groupe textarea{font-family:var(--font-corps);font-size:0.9rem;font-weight:300;color:var(--texte);background:var(--creme);border:1px solid rgba(201,151,58,0.2);border-radius:3px;padding:0.7rem 1rem;transition:border-color 0.2s,box-shadow 0.2s;outline:none;width:100%;}
+    .form-groupe input:focus,
+    .form-groupe select:focus,
+    .form-groupe textarea:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(201,151,58,0.12);}
+    .form-groupe textarea{resize:vertical;min-height:100px;}
+    .form-groupe select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9973A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+    /* Checkboxes & radios */
+    .form-choix{display:flex;flex-direction:column;gap:0.6rem;}
+    .choix-item{display:flex;align-items:center;gap:0.7rem;cursor:pointer;}
+    .choix-item input[type="checkbox"],
+    .choix-item input[type="radio"]{accent-color:var(--or);width:16px;height:16px;cursor:pointer;}
+    .choix-item span{font-size:0.88rem;font-weight:300;color:var(--texte);}
+    .form-grille-check{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+    /* Bouton submit */
+    .btn-submit{width:100%;padding:1rem;background:var(--or);color:var(--blanc);border:none;border-radius:3px;font-family:var(--font-corps);font-size:0.85rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.25s,transform 0.2s,box-shadow 0.25s;margin-top:1.5rem;}
+    .btn-submit:hover{background:var(--terre);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,151,58,0.35);}
+    /* Confirmation */
+    .confirmation{display:none;background:#F0FBF4;border:1px solid rgba(39,174,96,0.3);border-radius:4px;padding:1.5rem;margin-top:1.5rem;text-align:center;}
+    .confirmation.visible{display:block;}
+    .confirmation-icone{font-size:2.5rem;margin-bottom:0.5rem;}
+    .confirmation-titre{font-family:var(--font-titre);font-size:1.4rem;font-weight:600;color:var(--vert);margin-bottom:0.4rem;}
+    .confirmation-texte{font-size:0.85rem;color:#4A7A5A;font-weight:300;}
+    /* SIDEBAR */
+    .sidebar{display:flex;flex-direction:column;gap:1.5rem;}
+    .sidebar-card{background:var(--blanc);border:1px solid rgba(201,151,58,0.15);border-radius:6px;padding:1.5rem;box-shadow:0 2px 12px rgba(59,36,16,0.04);}
+    .sidebar-card-titre{font-family:var(--font-titre);font-size:1.1rem;font-weight:600;color:var(--brun);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(201,151,58,0.15);}
+    .hotel-item{display:flex;align-items:flex-start;gap:0.8rem;padding:0.8rem 0;border-bottom:1px solid rgba(201,151,58,0.08);}
+    .hotel-item:last-child{border-bottom:none;padding-bottom:0;}
+    .hotel-icone{font-size:1.5rem;flex-shrink:0;}
+    .hotel-nom{font-family:var(--font-titre);font-size:0.95rem;font-weight:600;color:var(--brun);}
+    .hotel-cat{font-size:0.72rem;color:var(--or);letter-spacing:0.1em;}
+    .hotel-etoiles{color:var(--or);font-size:0.7rem;letter-spacing:2px;}
+    .info-pratique{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;font-size:0.83rem;font-weight:300;color:var(--gris);border-bottom:1px solid rgba(201,151,58,0.08);}
+    .info-pratique:last-child{border-bottom:none;}
+    .info-pratique span:first-child{font-size:1rem;flex-shrink:0;}
+    /* FOOTER */
+    footer{background:var(--brun);color:rgba(245,239,224,0.6);border-top:1px solid rgba(201,151,58,0.2);}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;}
+    .footer-col h4{font-family:var(--font-titre);font-size:1rem;font-weight:600;color:var(--or-clair);margin-bottom:0.8rem;}
+    .footer-col p,.footer-col a{font-size:0.82rem;font-weight:300;line-height:1.8;color:rgba(245,239,224,0.55);text-decoration:none;display:block;}
+    .footer-col a:hover{color:var(--or);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:1rem 2rem;border-top:1px solid rgba(201,151,58,0.1);display:flex;justify-content:space-between;font-size:0.75rem;color:rgba(245,239,224,0.3);}
+    .footer-divider{width:32px;height:1px;background:var(--or);opacity:0.5;margin:0.6rem 0;}
+    @media(max-width:1000px){.grille-resa{grid-template-columns:1fr;}.sidebar{display:grid;grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){.header-inner{padding:0 1rem;height:60px;}.brand-tagline{display:none;}nav ul li a{padding:0.4rem 0.6rem;font-size:0.75rem;}.form-grille,.form-grille.trois{grid-template-columns:1fr;}.form-grille-check{grid-template-columns:1fr;}.footer-inner{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:0.5rem;}.sidebar{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">BD</div>
+        <div class="brand-text"><span class="brand-name">Bobo-Dioulasso</span><span class="brand-tagline">Cité de l'Harmonie</span></div>
+      </a>
+      <nav><ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="patrimoine.html">Patrimoine</a></li>
+        <li><a href="reservation.html" class="actif">Réservation d'hôtel</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+      </ul></nav>
+    </div>
+  </header>
+
+  <div class="fil-ariane"><div class="fil-ariane-inner">
+    <a href="index.html">Accueil</a> <span>›</span> <span>Réservation d'hôtel</span>
+  </div></div>
+
+  <section class="hero-page">
+    <div class="hero-page-inner">
+      <span class="hero-label">✦ Hébergement & Séjour ✦</span>
+      <h1 class="hero-titre">Réservez votre <em>séjour</em></h1>
+      <p class="hero-sous">Trouvez et réservez l'hébergement idéal pour profiter pleinement de la Cité de l'Harmonie.</p>
+    </div>
+  </section>
+
+  <div class="page-contenu">
+    <div class="grille-resa">
+
+      <!-- FORMULAIRE -->
+      <div class="form-card">
+        <p class="section-sous-titre">Formulaire de réservation</p>
+        <h2 class="section-titre">Votre <span>séjour</span> à Bobo</h2>
+        <div class="separateur"><span class="separateur-icone">✦</span></div>
+
+        <div id="formulaire">
+
+          <!-- 1. Informations personnelles -->
+          <div class="form-section-titre"><span>👤</span> Informations personnelles</div>
+          <div class="form-grille">
+            <div class="form-groupe">
+              <label>Nom <span class="requis">*</span></label>
+              <input type="text" id="nom" placeholder="Votre nom de famille" required/>
+            </div>
+            <div class="form-groupe">
+              <label>Prénom <span class="requis">*</span></label>
+              <input type="text" id="prenom" placeholder="Votre prénom" required/>
+            </div>
+          </div>
+          <div class="form-grille" style="margin-top:1.2rem;">
+            <div class="form-groupe">
+              <label>Adresse e-mail <span class="requis">*</span></label>
+              <input type="email" id="email" placeholder="exemple@email.com" required/>
+            </div>
+            <div class="form-groupe">
+              <label>Téléphone <span class="requis">*</span></label>
+              <input type="tel" id="telephone" placeholder="+226 XX XX XX XX" required/>
+            </div>
+          </div>
+          <div class="form-grille un" style="margin-top:1.2rem;">
+            <div class="form-groupe">
+              <label>Nationalité</label>
+              <select id="nationalite">
+                <option value="">Sélectionnez votre nationalité</option>
+                <option>Burkinabè</option>
+                <option>Française</option>
+                <option>Ivoirienne</option>
+                <option>Malienne</option>
+                <option>Sénégalaise</option>
+                <option>Ghanéenne</option>
+                <option>Américaine</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2. Détails du séjour -->
+          <div class="form-section-titre"><span>📅</span> Détails du séjour</div>
+          <div class="form-grille">
+            <div class="form-groupe">
+              <label>Date d'arrivée <span class="requis">*</span></label>
+              <input type="date" id="arrivee" required/>
+            </div>
+            <div class="form-groupe">
+              <label>Date de départ <span class="requis">*</span></label>
+              <input type="date" id="depart" required/>
+            </div>
+          </div>
+          <div class="form-grille trois" style="margin-top:1.2rem;">
+            <div class="form-groupe">
+              <label>Adultes <span class="requis">*</span></label>
+              <select id="adultes" required>
+                <option value="1">1 adulte</option>
+                <option value="2" selected>2 adultes</option>
+                <option value="3">3 adultes</option>
+                <option value="4">4 adultes</option>
+                <option value="5">5 adultes</option>
+                <option value="6">6+ adultes</option>
+              </select>
+            </div>
+            <div class="form-groupe">
+              <label>Enfants</label>
+              <select id="enfants">
+                <option value="0">Aucun enfant</option>
+                <option value="1">1 enfant</option>
+                <option value="2">2 enfants</option>
+                <option value="3">3 enfants</option>
+                <option value="4">4+ enfants</option>
+              </select>
+            </div>
+            <div class="form-groupe">
+              <label>Chambres <span class="requis">*</span></label>
+              <select id="chambres" required>
+                <option value="1">1 chambre</option>
+                <option value="2">2 chambres</option>
+                <option value="3">3 chambres</option>
+                <option value="4">4+ chambres</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 3. Type d'hébergement -->
+          <div class="form-section-titre"><span>🏨</span> Type d'hébergement</div>
+          <div class="form-grille">
+            <div class="form-groupe">
+              <label>Catégorie d'hôtel <span class="requis">*</span></label>
+              <select id="categorie" required>
+                <option value="">Choisissez une catégorie</option>
+                <option>⭐⭐ — Économique</option>
+                <option>⭐⭐⭐ — Confort</option>
+                <option>⭐⭐⭐⭐ — Supérieur</option>
+                <option>⭐⭐⭐⭐⭐ — Luxe</option>
+              </select>
+            </div>
+            <div class="form-groupe">
+              <label>Type de chambre <span class="requis">*</span></label>
+              <select id="type-chambre" required>
+                <option value="">Sélectionnez</option>
+                <option>Chambre simple</option>
+                <option>Chambre double</option>
+                <option>Chambre twin</option>
+                <option>Suite junior</option>
+                <option>Suite supérieure</option>
+                <option>Appartement</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 4. Services & équipements -->
+          <div class="form-section-titre"><span>✨</span> Services souhaités</div>
+          <div class="form-grille-check">
+            <label class="choix-item"><input type="checkbox" name="services" value="wifi"/> <span>📶 Wi-Fi inclus</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="piscine"/> <span>🏊 Piscine</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="restaurant"/> <span>🍽️ Restaurant sur place</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="clim"/> <span>❄️ Climatisation</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="parking"/> <span>🚗 Parking sécurisé</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="spa"/> <span>💆 Spa & bien-être</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="transfert"/> <span>✈️ Transfert aéroport</span></label>
+            <label class="choix-item"><input type="checkbox" name="services" value="guide"/> <span>🗺️ Guide touristique</span></label>
+          </div>
+
+          <!-- 5. Régime alimentaire -->
+          <div class="form-section-titre"><span>🍴</span> Formule repas</div>
+          <div class="form-choix">
+            <label class="choix-item"><input type="radio" name="repas" value="sans"/> <span>Sans repas (logement seul)</span></label>
+            <label class="choix-item"><input type="radio" name="repas" value="petit-dej" checked/> <span>Petit-déjeuner inclus</span></label>
+            <label class="choix-item"><input type="radio" name="repas" value="demi"/> <span>Demi-pension (petit-déjeuner + dîner)</span></label>
+            <label class="choix-item"><input type="radio" name="repas" value="pension"/> <span>Pension complète (3 repas)</span></label>
+            <label class="choix-item"><input type="radio" name="repas" value="tout"/> <span>Tout inclus</span></label>
+          </div>
+
+          <!-- 6. Motif & demandes spéciales -->
+          <div class="form-section-titre"><span>📝</span> Demandes particulières</div>
+          <div class="form-grille un">
+            <div class="form-groupe">
+              <label>Motif du séjour</label>
+              <select id="motif">
+                <option value="">Sélectionnez le motif</option>
+                <option>Tourisme & découverte</option>
+                <option>Affaires & conférences</option>
+                <option>Lune de miel & romantique</option>
+                <option>Famille & enfants</option>
+                <option>Événement (mariage, anniversaire…)</option>
+                <option>Pèlerinage & spiritualité</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grille un" style="margin-top:1.2rem;">
+            <div class="form-groupe">
+              <label>Demandes spéciales ou commentaires</label>
+              <textarea id="commentaires" placeholder="Lit bébé, étage élevé, accès mobilité réduite, régime alimentaire particulier, heure d'arrivée tardive…"></textarea>
+            </div>
+          </div>
+
+          <!-- 7. Mode de paiement -->
+          <div class="form-section-titre"><span>💳</span> Mode de paiement</div>
+          <div class="form-choix">
+            <label class="choix-item"><input type="radio" name="paiement" value="carte" checked/> <span>Carte bancaire (Visa / Mastercard)</span></label>
+            <label class="choix-item"><input type="radio" name="paiement" value="mobile"/> <span>Mobile Money (Orange Money / Moov)</span></label>
+            <label class="choix-item"><input type="radio" name="paiement" value="especes"/> <span>Espèces à l'arrivée</span></label>
+            <label class="choix-item"><input type="radio" name="paiement" value="virement"/> <span>Virement bancaire</span></label>
+          </div>
+
+          <div class="form-grille un" style="margin-top:1.5rem;">
+            <label class="choix-item">
+              <input type="checkbox" id="cgu" required/>
+              <span>J'accepte les <a href="#" style="color:var(--or);">conditions générales</a> et la <a href="#" style="color:var(--or);">politique de confidentialité</a> <span class="requis">*</span></span>
+            </label>
+          </div>
+
+          <button class="btn-submit" onclick="soumettre()">Confirmer ma réservation →</button>
+        </div>
+
+        <!-- Message de confirmation -->
+        <div class="confirmation" id="confirmation">
+          <div class="confirmation-icone">✅</div>
+          <div class="confirmation-titre">Réservation envoyée !</div>
+          <p class="confirmation-texte">Votre demande a bien été reçue. Vous recevrez une confirmation par e-mail dans les 24 heures. Bienvenue à Bobo-Dioulasso !</p>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-titre">🏨 Hôtels recommandés</div>
+          <div class="hotel-item">
+            <div class="hotel-icone">🌟</div>
+            <div>
+              <div class="hotel-nom">Hôtel Ran</div>
+              <div class="hotel-etoiles">★★★★★</div>
+              <div class="hotel-cat">Luxe · Centre-ville</div>
+            </div>
+          </div>
+          <div class="hotel-item">
+            <div class="hotel-icone">🏩</div>
+            <div>
+              <div class="hotel-nom">Hôtel Burkina</div>
+              <div class="hotel-etoiles">★★★★</div>
+              <div class="hotel-cat">Supérieur · Vue jardin</div>
+            </div>
+          </div>
+          <div class="hotel-item">
+            <div class="hotel-icone">🏡</div>
+            <div>
+              <div class="hotel-nom">Auberge de Bobo</div>
+              <div class="hotel-etoiles">★★★</div>
+              <div class="hotel-cat">Confort · Ambiance locale</div>
+            </div>
+          </div>
+          <div class="hotel-item">
+            <div class="hotel-icone">🛖</div>
+            <div>
+              <div class="hotel-nom">Case de Passage</div>
+              <div class="hotel-etoiles">★★</div>
+              <div class="hotel-cat">Économique · Authentique</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-titre">ℹ️ Informations pratiques</div>
+          <div class="info-pratique"><span>🌡️</span><span>Meilleure période : nov. – mars (saison sèche et fraîche)</span></div>
+          <div class="info-pratique"><span>✈️</span><span>Aéroport de Bobo-Dioulasso (BBO) à 15 min du centre</span></div>
+          <div class="info-pratique"><span>💱</span><span>Devise locale : Franc CFA (XOF)</span></div>
+          <div class="info-pratique"><span>🕐</span><span>Check-in : 14h — Check-out : 12h</span></div>
+          <div class="info-pratique"><span>📞</span><span>Assistance 24h/24 : +226 20 97 00 00</span></div>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--brun);border-color:rgba(201,151,58,0.3);">
+          <div class="sidebar-card-titre" style="color:var(--or-clair);border-color:rgba(201,151,58,0.2);">💡 Le saviez-vous ?</div>
+          <p style="font-size:0.84rem;font-weight:300;color:rgba(245,239,224,0.7);line-height:1.7;">Bobo-Dioulasso est surnommée la <em style="color:var(--or-clair);">Cité de l'Harmonie</em> pour la cohabitation pacifique de ses nombreuses communautés et religions. Une ville où l'on arrive étranger et repart avec des amis.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col"><h4>Bobo-Dioulasso</h4><div class="footer-divider"></div><p>Deuxième ville du Burkina Faso, carrefour culturel de l'Afrique de l'Ouest.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><div class="footer-divider"></div><a href="index.html">Accueil</a><a href="patrimoine.html">Patrimoine</a><a href="reservation.html">Réservation d'hôtel</a><a href="galerie.html">Galerie</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-divider"></div><p>Mairie de Bobo-Dioulasso</p><p>Burkina Faso, Hauts-Bassins</p><p>tourisme@bobodioulasso.bf</p></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Bobo-Dioulasso — Tous droits réservés</span><span>Site touristique officiel</span></div>
+  </footer>
+
+  <script>
+    function soumettre() {
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const tel = document.getElementById('telephone').value.trim();
+      const arrivee = document.getElementById('arrivee').value;
+      const depart = document.getElementById('depart').value;
+      const categorie = document.getElementById('categorie').value;
+      const typeChambre = document.getElementById('type-chambre').value;
+      const cgu = document.getElementById('cgu').checked;
+      if (!nom||!prenom||!email||!tel||!arrivee||!depart||!categorie||!typeChambre||!cgu) {
+        alert('Veuillez remplir tous les champs obligatoires (*) et accepter les conditions générales.');
+        return;
+      }
+      document.getElementById('formulaire').style.display = 'none';
+      document.getElementById('confirmation').classList.add('visible');
+      window.scrollTo({top: document.getElementById('confirmation').offsetTop - 100, behavior:'smooth'});
+    }
+    // Date min = aujourd'hui
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('arrivee').min = today;
+    document.getElementById('depart').min = today;
+    document.getElementById('arrivee').addEventListener('change', function(){
+      document.getElementById('depart').min = this.value;
+    });
+  </script>
+</body>
+</html>

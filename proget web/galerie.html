@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galerie — Bobo-Dioulasso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--or:#C9973A;--or-clair:#E8C97A;--brun:#3B2410;--terre:#6B3D1E;--creme:#F5EFE0;--blanc:#FDFAF4;--texte:#2C1A0E;--gris:#8C7B6B;--font-titre:'Cormorant Garamond',serif;--font-corps:'Jost',sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-corps);background-color:var(--blanc);color:var(--texte);min-height:100vh;display:flex;flex-direction:column;background-image:radial-gradient(ellipse at 10% 20%,rgba(201,151,58,0.07) 0%,transparent 55%),radial-gradient(ellipse at 90% 80%,rgba(107,61,30,0.06) 0%,transparent 55%),url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9973A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+    /* HEADER */
+    header{position:sticky;top:0;z-index:100;background:rgba(59,36,16,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,151,58,0.3);}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px;}
+    .brand{display:flex;align-items:center;gap:0.9rem;text-decoration:none;}
+    .brand-logo{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--or),var(--terre));display:flex;align-items:center;justify-content:center;font-family:var(--font-titre);font-size:1.4rem;font-weight:700;color:var(--blanc);box-shadow:0 0 0 2px rgba(201,151,58,0.4);}
+    .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+    .brand-name{font-family:var(--font-titre);font-size:1.25rem;font-weight:600;color:var(--or-clair);}
+    .brand-tagline{font-size:0.68rem;font-weight:300;color:rgba(245,239,224,0.55);letter-spacing:0.18em;text-transform:uppercase;}
+    nav ul{list-style:none;display:flex;gap:0.2rem;}
+    nav ul li a{display:block;padding:0.5rem 1rem;font-size:0.82rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,239,224,0.75);text-decoration:none;transition:color 0.2s;position:relative;}
+    nav ul li a::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--or);transition:width 0.3s ease;}
+    nav ul li a:hover,nav ul li a.actif{color:var(--or-clair);}
+    nav ul li a:hover::after,nav ul li a.actif::after{width:calc(100% - 2rem);}
+    /* FIL ARIANE */
+    .fil-ariane{background:var(--creme);border-bottom:1px solid rgba(201,151,58,0.15);padding:0.75rem 2rem;}
+    .fil-ariane-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--gris);}
+    .fil-ariane a{color:var(--or);text-decoration:none;}
+    /* HERO */
+    .hero-page{background:linear-gradient(160deg,var(--brun) 0%,#4A2810 60%,var(--terre) 100%);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;}
+    .hero-page::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9973A' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3C/g%3E%3C/svg%3E");}
+    .hero-page-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .hero-label{display:inline-block;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--or);border:1px solid rgba(201,151,58,0.4);padding:0.4rem 1.2rem;border-radius:2px;margin-bottom:1.5rem;}
+    .hero-titre{font-family:var(--font-titre);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;color:var(--creme);line-height:1.05;margin-bottom:1rem;}
+    .hero-titre em{font-style:italic;color:var(--or-clair);}
+    .hero-sous{font-size:0.95rem;font-weight:300;color:rgba(245,239,224,0.65);line-height:1.7;}
+    /* FILTRES */
+    .filtres-barre{background:var(--creme);border-bottom:1px solid rgba(201,151,58,0.12);padding:1.2rem 2rem;position:sticky;top:72px;z-index:50;}
+    .filtres-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
+    .filtre-btn{padding:0.45rem 1.1rem;font-family:var(--font-corps);font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;border:1px solid rgba(201,151,58,0.25);border-radius:2px;background:transparent;color:var(--gris);cursor:pointer;transition:all 0.2s;}
+    .filtre-btn:hover,.filtre-btn.actif{background:var(--or);color:var(--blanc);border-color:var(--or);}
+    .filtres-label{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gris);margin-right:0.5rem;}
+    /* CONTENU */
+    .page-contenu{flex:1;max-width:1200px;margin:0 auto;width:100%;padding:3rem 2rem;}
+    .section-sous-titre{font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--or);margin-bottom:0.5rem;}
+    .section-titre{font-family:var(--font-titre);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;color:var(--brun);line-height:1.2;margin-bottom:1.5rem;}
+    .section-titre span{color:var(--or);font-style:italic;}
+    /* MASONRY */
+    .galerie-masonry{columns:4 280px;column-gap:1.2rem;margin-bottom:3rem;}
+    .photo-item{break-inside:avoid;margin-bottom:1.2rem;position:relative;overflow:hidden;border-radius:3px;cursor:pointer;border:1px solid rgba(201,151,58,0.1);}
+    .photo-item:hover .photo-overlay{opacity:1;}
+    .photo-item:hover .photo-img{transform:scale(1.04);}
+    .photo-img{width:100%;display:block;transition:transform 0.4s ease;background-repeat:no-repeat;background-size:cover;background-position:center;}
+    .photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(59,36,16,0.85) 0%,rgba(59,36,16,0.2) 60%,transparent 100%);opacity:0;transition:opacity 0.35s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:1rem;}
+    .photo-titre{font-family:var(--font-titre);font-size:1rem;font-weight:600;color:var(--creme);line-height:1.2;}
+    .photo-cat{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--or);margin-top:0.2rem;}
+    .photo-zoom{position:absolute;top:0.8rem;right:0.8rem;width:30px;height:30px;border-radius:50%;background:rgba(201,151,58,0.8);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:white;opacity:0;transition:opacity 0.3s;}
+    .photo-item:hover .photo-zoom{opacity:1;}
+    /* LIGHTBOX */
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(10,6,3,0.95);align-items:center;justify-content:center;}
+    .lightbox.ouverte{display:flex;}
+    .lightbox-contenu{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;}
+    .lightbox-img{width:100%;height:70vh;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:5rem;}
+    .lightbox-info{text-align:center;margin-top:1rem;}
+    .lightbox-titre{font-family:var(--font-titre);font-size:1.5rem;font-weight:600;color:var(--creme);}
+    .lightbox-desc{font-size:0.85rem;font-weight:300;color:rgba(245,239,224,0.6);margin-top:0.3rem;}
+    .lightbox-fermer{position:absolute;top:-2.5rem;right:0;background:none;border:1px solid rgba(255,255,255,0.2);color:white;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;transition:background 0.2s;}
+    .lightbox-fermer:hover{background:var(--or);}
+    .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(201,151,58,0.2);border:1px solid rgba(201,151,58,0.3);color:var(--or-clair);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+    .lightbox-nav:hover{background:var(--or);color:white;}
+    .lightbox-prev{left:-3.5rem;}
+    .lightbox-next{right:-3.5rem;}
+    .lightbox-compteur{position:absolute;bottom:-2rem;font-size:0.75rem;color:rgba(245,239,224,0.4);letter-spacing:0.15em;}
+    /* FOOTER */
+    footer{background:var(--brun);color:rgba(245,239,224,0.6);border-top:1px solid rgba(201,151,58,0.2);}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;}
+    .footer-col h4{font-family:var(--font-titre);font-size:1rem;font-weight:600;color:var(--or-clair);margin-bottom:0.8rem;}
+    .footer-col p,.footer-col a{font-size:0.82rem;font-weight:300;line-height:1.8;color:rgba(245,239,224,0.55);text-decoration:none;display:block;}
+    .footer-col a:hover{color:var(--or);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:1rem 2rem;border-top:1px solid rgba(201,151,58,0.1);display:flex;justify-content:space-between;font-size:0.75rem;color:rgba(245,239,224,0.3);}
+    .footer-divider{width:32px;height:1px;background:var(--or);opacity:0.5;margin:0.6rem 0;}
+    @media(max-width:768px){.header-inner{padding:0 1rem;height:60px;}.brand-tagline{display:none;}nav ul li a{padding:0.4rem 0.6rem;font-size:0.75rem;}.filtres-barre{top:60px;}.galerie-masonry{columns:2 160px;}.lightbox-nav{display:none;}.footer-inner{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:0.5rem;}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">BD</div>
+        <div class="brand-text"><span class="brand-name">Bobo-Dioulasso</span><span class="brand-tagline">Cité de l'Harmonie</span></div>
+      </a>
+      <nav><ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="patrimoine.html">Patrimoine</a></li>
+        <li><a href="reservation.html">Réservation d'hôtel</a></li>
+        <li><a href="galerie.html" class="actif">Galerie</a></li>
+      </ul></nav>
+    </div>
+  </header>
+
+  <div class="fil-ariane"><div class="fil-ariane-inner">
+    <a href="index.html">Accueil</a> <span>›</span> <span>Galerie</span>
+  </div></div>
+
+  <section class="hero-page">
+    <div class="hero-page-inner">
+      <span class="hero-label">✦ Photos & Images ✦</span>
+      <h1 class="hero-titre">Galerie de <em>Bobo</em></h1>
+      <p class="hero-sous">Un voyage visuel au cœur de la Cité de l'Harmonie — ses monuments, sa nature, son artisanat et sa vie quotidienne.</p>
+    </div>
+  </section>
+
+  <!-- FILTRES -->
+  <div class="filtres-barre">
+    <div class="filtres-inner">
+      <span class="filtres-label">Filtrer :</span>
+      <button class="filtre-btn actif" onclick="filtrer('tout', this)">Tout voir</button>
+      <button class="filtre-btn" onclick="filtrer('architecture', this)">Architecture</button>
+      <button class="filtre-btn" onclick="filtrer('nature', this)">Nature</button>
+      <button class="filtre-btn" onclick="filtrer('culture', this)">Culture</button>
+      <button class="filtre-btn" onclick="filtrer('artisanat', this)">Artisanat</button>
+      <button class="filtre-btn" onclick="filtrer('vie', this)">Vie quotidienne</button>
+    </div>
+  </div>
+
+  <div class="page-contenu">
+    <p class="section-sous-titre">Collection photographique</p>
+    <h2 class="section-titre">Les <span>images</span> de Bobo-Dioulasso</h2>
+
+    <div class="galerie-masonry" id="galerie">
+
+      <!-- Les photos sont des blocs colorés stylisés avec emoji et texte -->
+
+      <div class="photo-item" data-cat="architecture" data-index="0" onclick="ouvrir(0)">
+        <div class="photo-img" style="height:280px;background:linear-gradient(145deg,#4A2810,#8B5020,#C9973A);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="mosque.jpg" alt="Grande mosquée de bobo dioulasso" width="350"></div>
+        <div class="photo-overlay"><div class="photo-titre">Grande Mosquée de Dioulassoba</div><div class="photo-cat">Architecture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="nature" data-index="1" onclick="ouvrir(1)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#1A3040,#206080,#40A0C0);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="cascades.jpg" alt="cascades" width="400"></div>
+        <div class="photo-overlay"><div class="photo-titre">Cascades de Karfiguéla</div><div class="photo-cat">Nature</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="culture" data-index="2" onclick="ouvrir(2)">
+        <div class="photo-img" style="height:240px;background:linear-gradient(145deg,#2C3E1A,#5A7A30,#A0B870);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="balafon.jpg" alt="Balafon — Instrument roi de Bobo" width="350"></div>
+        <div class="photo-overlay"><div class="photo-titre">Balafon — Instrument roi de Bobo</div><div class="photo-cat">Culture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="artisanat" data-index="3" onclick="ouvrir(3)">
+        <div class="photo-img" style="height:220px;background:linear-gradient(145deg,#3A2A10,#7A5A20,#C09040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="tissage.jpg" alt="Tissage bogolan traditionnel" width="350"></div>
+        <div class="photo-overlay"><div class="photo-titre">Tissage bogolan traditionnel</div><div class="photo-cat">Artisanat</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="nature" data-index="4" onclick="ouvrir(4)">
+        <div class="photo-img" style="height:260px;background:linear-gradient(145deg,#1E3A1A,#3A6B30,#70A050);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="koro.jpg" alt="Forêt Sacrée de Koro" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Forêt Sacrée de Koro</div><div class="photo-cat">Nature</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="vie" data-index="5" onclick="ouvrir(5)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#3A2010,#7A4A20,#C08040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="marcher_central.jpg" alt="Marché central de Bobo-Dioulasso" width="380"></div>
+        <div class="photo-overlay"><div class="photo-titre">Marché central animé</div><div class="photo-cat">Vie quotidienne</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="architecture" data-index="6" onclick="ouvrir(6)">
+        <div class="photo-img" style="height:240px;background:linear-gradient(145deg,#20203A,#40407A,#7070C0);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="Cathedrale de bobo dioulasso.jpeg" alt="Cathedrale du sacre-coeur" width="380"></div>
+        <div class="photo-overlay"><div class="photo-titre">Cathédrale du Sacré-Cœur</div><div class="photo-cat">Architecture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="culture" data-index="7" onclick="ouvrir(7)">
+        <div class="photo-img" style="height:220px;background:linear-gradient(145deg,#3A1020,#7A2040,#C05080);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="masque ceremonial.jpeg" alt="Masques ceremonial" width="380"></div>
+        <div class="photo-overlay"><div class="photo-titre">Masques cérémoniels Do</div><div class="photo-cat">Culture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="nature" data-index="8" onclick="ouvrir(8)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#102030,#204060,#3A80A0);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="valee du Kou.jpeg" alt="Kou" width="380"></div>
+        <div class="photo-overlay"><div class="photo-titre">Vallée du Kou au coucher du soleil</div><div class="photo-cat">Nature</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="artisanat" data-index="9" onclick="ouvrir(9)">
+        <div class="photo-img" style="height:260px;background:linear-gradient(145deg,#2A1A0A,#5A3A1A,#A07030);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="poterie .jpeg" alt="poterie de Bobo-Dioulasso" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Poteries en terre cuite</div><div class="photo-cat">Artisanat</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="vie" data-index="10" onclick="ouvrir(10)">
+        <div class="photo-img" style="height:220px;background:linear-gradient(145deg,#1A1A0A,#3A3A1A,#808040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="coucher.jpg" alt="lever du soleil Bobo-Dioulasso" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Lever du soleil sur Bobo</div><div class="photo-cat">Vie quotidienne</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="architecture" data-index="11" onclick="ouvrir(11)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#2C3E1A,#3A1A10,#7A3A10);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="case rohdes.jpeg" alt="case" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Cases rondes du vieux Kibidwé</div><div class="photo-cat">Architecture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="culture" data-index="12" onclick="ouvrir(12)">
+        <div class="photo-img" style="height:240px;background:linear-gradient(145deg,#1A2A10,#3A5A20,#60A040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="mare sacree.jpeg" alt="mare" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Mare sacrée de Dafra</div><div class="photo-cat">Culture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="artisanat" data-index="13" onclick="ouvrir(13)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#3A1A10,#7A3A20,#C06040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="forgeron.jpeg" alt="forgeron" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Forgeron au travail, Tounouma</div><div class="photo-cat">Artisanat</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="vie" data-index="14" onclick="ouvrir(14)">
+        <div class="photo-img" style="height:260px;background:linear-gradient(145deg,#202020,#484848,#808080);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="Sitaraille.jpeg" alt="gare" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Gare ferroviaire historique</div><div class="photo-cat">Vie quotidienne</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="culture" data-index="15" onclick="ouvrir(15)">
+        <div class="photo-img" style="height:220px;background:linear-gradient(145deg,#3A2010,#7A4A20,#D4A060);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="festival.jpeg" alt="festival" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Festival de musique traditionnelle</div><div class="photo-cat">Culture</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="nature" data-index="16" onclick="ouvrir(16)">
+        <div class="photo-img" style="height:200px;background:linear-gradient(145deg,#0A1A0A,#1A4A1A,#40A040);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="foret sacrer.jpeg" alt="foret" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Faune de la forêt de Koro</div><div class="photo-cat">Nature</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+      <div class="photo-item" data-cat="vie" data-index="17" onclick="ouvrir(17)">
+        <div class="photo-img" style="height:240px;background:linear-gradient(145deg,#2A1A0A,#5A3A1A,#C09050);display:flex;align-items:center;justify-content:center;font-size:4rem;"><img src="femme traditionnelle.jpeg" alt="traditionnel" width="380" height="300"></div>
+        <div class="photo-overlay"><div class="photo-titre">Femmes en tenues traditionnelles</div><div class="photo-cat">Vie quotidienne</div></div>
+        <div class="photo-zoom">🔍</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="fermerLightbox(event)">
+    <div class="lightbox-contenu" onclick="event.stopPropagation()">
+      <button class="lightbox-fermer" onclick="fermer()">✕</button>
+      <button class="lightbox-nav lightbox-prev" onclick="naviguer(-1)">‹</button>
+      <div class="lightbox-img" id="lb-img"></div>
+      <div class="lightbox-info">
+        <div class="lightbox-titre" id="lb-titre"></div>
+        <div class="lightbox-desc" id="lb-cat"></div>
+      </div>
+      <span class="lightbox-compteur" id="lb-compteur"></span>
+      <button class="lightbox-nav lightbox-next" onclick="naviguer(1)">›</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col"><h4>Bobo-Dioulasso</h4><div class="footer-divider"></div><p>Deuxième ville du Burkina Faso, carrefour culturel de l'Afrique de l'Ouest.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><div class="footer-divider"></div><a href="index.html">Accueil</a><a href="patrimoine.html">Patrimoine</a><a href="reservation.html">Réservation d'hôtel</a><a href="galerie.html">Galerie</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-divider"></div><p>Mairie de Bobo-Dioulasso</p><p>Burkina Faso, Hauts-Bassins</p><p>tourisme@bobodioulasso.bf</p></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Bobo-Dioulasso — Tous droits réservés</span><span>Site touristique officiel</span></div>
+  </footer>
+
+  <script>
+   /* const photos = [
+      {titre:"Grande Mosquée de Dioulassoba", cat:"Architecture", icone:"🕌", bg:"linear-gradient(145deg,#4A2810,#8B5020,#C9973A)",src:"mosque.jpg"},
+      {titre:"Cascades de Karfiguéla", cat:"Nature", icone:"💧", bg:"linear-gradient(145deg,#1A3040,#206080,#40A0C0)"},
+      {titre:"Balafon — Instrument roi de Bobo", cat:"Culture", icone:"🥁", bg:"linear-gradient(145deg,#2C3E1A,#5A7A30,#A0B870)"},
+      {titre:"Tissage bogolan traditionnel", cat:"Artisanat", icone:"🧵", bg:"linear-gradient(145deg,#3A2A10,#7A5A20,#C09040)"},
+      {titre:"Forêt Sacrée de Koro", cat:"Nature", icone:"🌳", bg:"linear-gradient(145deg,#1E3A1A,#3A6B30,#70A050)"},
+      {titre:"Marché central animé", cat:"Vie quotidienne", icone:"🛍️", bg:"linear-gradient(145deg,#3A2010,#7A4A20,#C08040)"},
+      {titre:"Cathédrale du Sacré-Cœur", cat:"Architecture", icone:"⛪", bg:"linear-gradient(145deg,#20203A,#40407A,#7070C0)"},
+      {titre:"Masques cérémoniels Do", cat:"Culture", icone:"🎭", bg:"linear-gradient(145deg,#3A1020,#7A2040,#C05080)"},
+      {titre:"Vallée du Kou au coucher du soleil", cat:"Nature", icone:"🌊", bg:"linear-gradient(145deg,#102030,#204060,#3A80A0)"},
+      {titre:"Poteries en terre cuite", cat:"Artisanat", icone:"🏺", bg:"linear-gradient(145deg,#2A1A0A,#5A3A1A,#A07030)"},
+      {titre:"Lever du soleil sur Bobo", cat:"Vie quotidienne", icone:"🌅", bg:"linear-gradient(145deg,#1A1A0A,#3A3A1A,#808040)"},
+      {titre:"Cases rondes du vieux Kibidwé", cat:"Architecture", icone:"🏘️", bg:"linear-gradient(145deg,#2C3E1A,#3A1A10,#7A3A10)"},
+      {titre:"Mare sacrée de Dafra", cat:"Culture", icone:"🐟", bg:"linear-gradient(145deg,#1A2A10,#3A5A20,#60A040)"},
+      {titre:"Forgeron au travail, Tounouma", cat:"Artisanat", icone:"🔨", bg:"linear-gradient(145deg,#3A1A10,#7A3A20,#C06040)"},
+      {titre:"Gare ferroviaire historique", cat:"Vie quotidienne", icone:"🚂", bg:"linear-gradient(145deg,#202020,#484848,#808080)"},
+      {titre:"Festival de musique traditionnelle", cat:"Culture", icone:"🎶", bg:"linear-gradient(145deg,#3A2010,#7A4A20,#D4A060)"},
+      {titre:"Faune de la forêt de Koro", cat:"Nature", icone:"🦜", bg:"linear-gradient(145deg,#0A1A0A,#1A4A1A,#40A040)"},
+      {titre:"Femmes en tenues traditionnelles", cat:"Vie quotidienne", icone:"🌺", bg:"linear-gradient(145deg,#2A1A0A,#5A3A1A,#C09050)"},
+    ];*/
+    let courant = 0;
+    function ouvrir(i){
+      courant = i;
+      afficher();
+      document.getElementById('lightbox').classList.add('ouverte');
+    }
+    function afficher(){
+      const p = photos[courant];
+      document.getElementById('lb-img').style.cssText = `width:100%;height:70vh;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8rem;background:${p.bg};`;
+      document.getElementById('lb-img').src = p.src;
+      document.getElementById('lb-titre').textContent = p.titre;
+      document.getElementById('lb-cat').textContent = p.cat;
+      document.getElementById('lb-compteur').textContent = (courant+1) + ' / ' + photos.length;
+    }
+    function naviguer(d){courant=(courant+d+photos.length)%photos.length;afficher();}
+    function fermer(){document.getElementById('lightbox').classList.remove('ouverte');}
+    function fermerLightbox(e){if(e.target===document.getElementById('lightbox'))fermer();}
+    document.addEventListener('keydown',function(e){
+      if(!document.getElementById('lightbox').classList.contains('ouverte'))return;
+      if(e.key==='ArrowLeft')naviguer(-1);
+      if(e.key==='ArrowRight')naviguer(1);
+      if(e.key==='Escape')fermer();
+    });
+
+    function filtrer(cat, btn){
+      document.querySelectorAll('.filtre-btn').forEach(b=>b.classList.remove('actif'));
+      btn.classList.add('actif');
+      document.querySelectorAll('.photo-item').forEach(item=>{
+        if(cat==='tout'||item.dataset.cat===cat){item.style.display='block';}
+        else{item.style.display='none';}
+      });
+    }
+  </script>
+</body>
+</html>
